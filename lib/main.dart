@@ -1,19 +1,20 @@
-// image, materialApp, scaffold, Icons,
-// buttons(ElevatedButton, IconButton, TextButton, GestureDetector, InkWell)
+/// Column, Row, Scroll View (SingleChildScrollView)
 
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Module7Class3());
+  runApp(Module8Class1());
 }
 
-class Module7Class3 extends StatelessWidget {
+class Module8Class1 extends StatelessWidget {
+  const Module8Class1({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Home(),
-      title: 'Module 7 Class 3',
+      title: 'Module 8 Class 1',
     );
   }
 }
@@ -24,91 +25,110 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        title: Text('Home'),
+        title: Text('HOME'),
+        centerTitle: true,
+        backgroundColor: Colors.grey,
       ),
-      body: Center(
-        /// Text Widget
-        // child: Text(
-        //   'Hello',
-        //   style: TextStyle(
-        //     color: Colors.red,
-        //     fontSize: 40,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
 
-        /// Icon Widget
-        // child: Icon(
-        //   Icons.mood,
-        //   size: 200,
-        //   color: Colors.yellow,
-        // ),
+      /// Column
+      // body: Column(
+      //   mainAxisSize: MainAxisSize.max,
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   crossAxisAlignment: CrossAxisAlignment.end,
+      //   children: [
+      //     Text('Data 1'),
+      //     Text('Data 2'),
+      //     Text('Data 3'),
+      //     Text('Data 4'),
+      //     Text('Data 5'),
+      //     ElevatedButton(
+      //       onPressed: () {},
+      //       child: Text('Click Here'),
+      //     ),
+      //     IconButton(
+      //       onPressed: () {},
+      //       icon: Icon(Icons.access_alarm),
+      //     ),
+      //     Icon(Icons.access_time_filled_outlined),
+      //   ],
+      // ),
 
-        /// Image Widget from Image.network
-        // child: Image.network(
-        //   'https://cdn.ostad.app/course/cover/2023-12-04T11-05-21.903Z-Flutter.jpg',
-        //   width: 400,
-        //   height: 500,
-        // ),
+      /// SingleChildScrollView , ROW
+      // body: SingleChildScrollView(
+      //   scrollDirection: Axis.horizontal,
+      //   child: Row(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       crossAxisAlignment: CrossAxisAlignment.start,
+      //       mainAxisSize: MainAxisSize.max,
+      //       children: [
+      //         Text('Data 1\nfrom Evan'),
+      //         Text('Data 2'),
+      //         Text('Data 3'),
+      //         Text('Data 4'),
+      //         Text('Data 5'),
+      //         Text('Data 6'),
+      //         Text('Data 7'),
+      //         Text('Data 8'),
+      //         Text('Data 9'),
+      //         Text('Data 10'),
+      //         Text('Data 11'),
+      //         Text('Data 10'),
+      //         Text('Data 11'),
+      //         Text('Data 12'),
+      //         Text('Data 13'),
+      //         Text('Data 14'),
+      //         Text('Data 15'),
+      //
+      //       ]),
+      // ),
 
-        ///  Image Widget from Image.asset
-        // child: Image.asset(
-        //   'assets/images/BZS.jpg',
-        //   width: 500,
-        //   height: 300,
-        //   fit: BoxFit.cover,
-        // ),
-
-        /// Elevated Button
-        // child: ElevatedButton(
-        //   onPressed: () {
-        //     print('Button Pressed');
-        //   },
-        //   child: Text('Notification'),
-        // ),
-
-        /// Icon Button
-        // child: IconButton(
-        //   onPressed: () {
-        //     print('Icon Button');
-        //   },
-        //   icon: Icon(
-        //     Icons.smart_button,
-        //     size: 50,
-        //   ),
-        // ),
-
-        /// Text Button
-        // child: TextButton(
-        //   onPressed: () {
-        //     print('show button pressed');
-        //   },
-        //   child: Text('Text Button'),
-        // ),
-
-        /// Gesture Detector for response callback
-        // child: GestureDetector(
-        //   onTap: () {
-        //     print('single tap');
-        //   },
-        //   onDoubleTap: () {
-        //     print('Double Tap');
-        //   },
-        //   child: Icon(Icons.abc),
-        // ),
-
-        /// InkWell for response reactions with callback
-        child: InkWell(
-          onTap: () {
-            print('Single Tap');
-          },
-          onDoubleTap: () {
-            print('Double Tap');
-          },
-          child: Text('Test Text'),
+      /// Row, Column in same body with Scroll View
+      body: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            Column(
+              children: [Text('Column 1')],
+            ),
+            Column(
+              children: [
+                Text('Column 2'),
+                Row(
+                  children: [
+                    Text('Column 2 Row 1'),
+                    Text('Column 2 Row 2'),
+                  ],
+                )
+              ],
+            ),
+            Column(
+              children: [
+                Text('Column 3'),
+                Text('Column 3'),
+                Text('Column 3'),
+                Text('Column 3'),
+                Text('Column 3'),
+                Text('Column 3'),
+              ],
+            ),
+            Column(
+              children: [Text('Column 4')],
+            ),
+            Column(
+              children: [
+                Text('Column 5'),
+                Text('Column 5'),
+                Text('Column 5'),
+                Text('Column 5'),
+              ],
+            ),
+            Column(
+              children: [
+                Text('Column 6'),
+              ],
+            ),
+          ],
         ),
       ),
     );
