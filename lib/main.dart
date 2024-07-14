@@ -1,115 +1,196 @@
-// image, materialApp, scaffold, Icons,
-// buttons(ElevatedButton, IconButton, TextButton, GestureDetector, InkWell)
+/// ListView | SizedBox | Gridview | Divider | ListTile
 
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Module7Class3());
+  runApp(Module8Class2());
 }
 
-class Module7Class3 extends StatelessWidget {
+class Module8Class2 extends StatelessWidget {
+  const Module8Class2({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp(
       home: Home(),
-      title: 'Module 7 Class 3',
+      title: 'Module 8 Class 2',
     );
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  List<String> friendList = [
+    'Priam',
+    'Rahat',
+    'Sanji',
+    'Walid',
+    'Anan',
+    'Onim',
+    'Rakib',
+    'Eashad'
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        title: Text('Home'),
-      ),
-      body: Center(
-        /// Text Widget
-        // child: Text(
-        //   'Hello',
-        //   style: TextStyle(
-        //     color: Colors.red,
-        //     fontSize: 40,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-
-        /// Icon Widget
-        // child: Icon(
-        //   Icons.mood,
-        //   size: 200,
-        //   color: Colors.yellow,
-        // ),
-
-        /// Image Widget from Image.network
-        // child: Image.network(
-        //   'https://cdn.ostad.app/course/cover/2023-12-04T11-05-21.903Z-Flutter.jpg',
-        //   width: 400,
-        //   height: 500,
-        // ),
-
-        ///  Image Widget from Image.asset
-        // child: Image.asset(
-        //   'assets/images/BZS.jpg',
-        //   width: 500,
-        //   height: 300,
-        //   fit: BoxFit.cover,
-        // ),
-
-        /// Elevated Button
-        // child: ElevatedButton(
-        //   onPressed: () {
-        //     print('Button Pressed');
-        //   },
-        //   child: Text('Notification'),
-        // ),
-
-        /// Icon Button
-        // child: IconButton(
-        //   onPressed: () {
-        //     print('Icon Button');
-        //   },
-        //   icon: Icon(
-        //     Icons.smart_button,
-        //     size: 50,
-        //   ),
-        // ),
-
-        /// Text Button
-        // child: TextButton(
-        //   onPressed: () {
-        //     print('show button pressed');
-        //   },
-        //   child: Text('Text Button'),
-        // ),
-
-        /// Gesture Detector for response callback
-        // child: GestureDetector(
-        //   onTap: () {
-        //     print('single tap');
-        //   },
-        //   onDoubleTap: () {
-        //     print('Double Tap');
-        //   },
-        //   child: Icon(Icons.abc),
-        // ),
-
-        /// InkWell for response reactions with callback
-        child: InkWell(
-          onTap: () {
-            print('Single Tap');
-          },
-          onDoubleTap: () {
-            print('Double Tap');
-          },
-          child: Text('Test Text'),
+        backgroundColor: Colors.blueGrey,
+        title: Center(
+          child: Text(
+            'Home',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
+      ),
+
+      /// ListView | SizedBox
+      // body: ListView(
+      //   children: [
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 1'),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 2'),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 3'),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 4'),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 5'),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 6'),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 7'),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 8'),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 100,
+      //       width: 100,
+      //       child: Center(
+      //         child: Text('Box 9'),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+
+      /// ListView another example
+      // body: ListView.builder(
+      //   itemCount: 100,
+      //   itemBuilder: (context, index) {
+      //     return SizedBox(
+      //       width: 100,
+      //       height: 100,
+      //       child: Center(
+      //         child: Text('BOX $index '),
+      //       ),
+      //     );
+      //   },
+      // )
+
+      /// ListView another example from get data any API or third party database
+      // body: ListView.builder(
+      //   itemCount: friendList.length,
+      //   itemBuilder: (context, index) {
+      //     return Text(friendList[index]);
+      //   },
+      // ),
+
+      /// GridView
+      // body: GridView.builder(
+      //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //       crossAxisCount: 3,
+      //       mainAxisSpacing: 10,
+      //       crossAxisSpacing: 10,
+      //       childAspectRatio: 1.1,
+      //     ),
+      //     itemCount: friendList.length,
+      //     itemBuilder: (context, index) {
+      //       return Column(
+      //         children: [
+      //           Text(index.toString()),
+      //           Text(friendList[index], ),
+      //         ],
+      //       );
+      //     }),
+
+      /// Divider | ListTile
+      body: ListView.separated(
+        itemCount: friendList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(friendList[index]),
+            tileColor: Colors.white54,
+            subtitle: Text('School Friend'),
+            trailing: Icon(Icons.school_outlined),
+            leading: Text(
+              (index + 1).toString(),
+              style: TextStyle(fontSize: 18),
+            ),
+            onTap: () {},
+            titleTextStyle: TextStyle(
+              color: Colors.red,
+              fontSize: 25,
+            ),
+            iconColor: Colors.black,
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider(
+            height: 15,
+            color: Colors.black12,
+            thickness: 2,
+            endIndent: 5,
+          );
+        },
       ),
     );
   }
