@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
     'Anan',
     'Onim',
     'Rakib',
-    'Eashad',
+    'Eashad'
   ];
 
   @override
