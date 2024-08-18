@@ -1,18 +1,95 @@
-/// Container | Buttons (Dialog,Bottom sheet)
+/// TextField | Theme
 
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Module8Class3());
+  runApp(Module9Class1());
 }
 
-class Module8Class3 extends StatelessWidget {
-  const Module8Class3({super.key});
+class Module9Class1 extends StatelessWidget {
+  const Module9Class1({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Home(),
+      title: 'Intro App',
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.pink,
+          titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2),
+        ),
+        textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.grey,
+                textStyle:
+                    TextStyle(fontSize: 16, fontWeight: FontWeight.w900))),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(color: Colors.green.shade200),
+          labelStyle: TextStyle(fontSize: 16),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: Colors.yellow,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.blue, width: 2),
+          ),
+        ),
+      ),
+
+      /// For Dark Theme
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.green,
+          titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2),
+        ),
+        textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.green,
+                textStyle:
+                    TextStyle(fontSize: 16, fontWeight: FontWeight.w900))),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(color: Colors.green.shade200),
+          labelStyle: TextStyle(fontSize: 16),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: Colors.yellow,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.blue, width: 2),
+          ),
+        ),
+      ),
+      themeMode: ThemeMode.light,
     );
   }
 }
@@ -25,150 +102,132 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController _descriptionTextEditingController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
-        backgroundColor: Colors.blueGrey,
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 100,
-              height: 100,
-              // color: Colors.deepPurple,
-              // padding: EdgeInsets.all(16),
-              // margin: EdgeInsets.all(16),
-              alignment: Alignment.topRight,
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                border: Border.all(color: Colors.yellow, width: 5),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(26),
-                  bottomRight: Radius.circular(26),
-                ),
-                shape: BoxShape.rectangle,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/Bangladesh2.jpg'),
-                  fit: BoxFit.cover,
-                  opacity: 0.4,
-                ),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: Colors.green.withOpacity(1), // Shadow color
-                    spreadRadius: 5, // Spread radius
-                    blurRadius: 10, // Blur radius
-                    offset: Offset(3, 3), // Offset in X and Y directions
-                  ),
-                ],
+            /// Name
+            TextField(
+              enabled: true,
+              decoration: InputDecoration(
+                label: Text('Name'),
+                // labelStyle: TextStyle(fontSize: 16),
+                icon: Icon(Icons.add),
+                prefixIcon: Icon(Icons.person),
+                suffixIcon: TextButton(onPressed: () {}, child: Text('Search')),
+                hintText: 'Enter Your Name',
+                // hintStyle: TextStyle(color: Colors.green.shade200),
+                // border: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(12),
+                //   borderSide: BorderSide(
+                //     color: Colors.yellow,
+                //   ),
+                // ),
+                // disabledBorder: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(12),
+                //   borderSide: BorderSide(
+                //     color: Colors.red,
+                //   ),
+                // ),
+                // focusedBorder: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(12),
+                //   borderSide: BorderSide(color: Colors.blue, width: 2),
+                // ),
               ),
             ),
-            Text(
-              'Bangladesh 2.0',
-              style: TextStyle(color: Colors.black),
-            ),
-            Container(
-              width: 100,
-              height: 100,
-              // color: Colors.deepPurple,
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage('assets/images/Bangladesh2.jpg'),
-              )),
+            SizedBox(
+              height: 16,
             ),
 
-            /// Dialog Button
+            /// Password
+            TextField(
+              enabled: true,
+              obscureText: true,
+              decoration: InputDecoration(
+                label: Text('Password'),
+                labelStyle: TextStyle(fontSize: 16),
+                icon: Icon(Icons.password),
+                hintText: 'Enter Your Password',
+                hintStyle: TextStyle(color: Colors.green.shade200),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Colors.yellow,
+                  ),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.blue, width: 2),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            TextField(),
+            SizedBox(
+              height: 16,
+            ),
 
-            ElevatedButton(
-              onPressed: () {
-                // showAboutDialog(
-                //   context: context,
-                //   applicationName: 'Sample',
-                //   applicationVersion: '1.10.1.1',
-                //   children: [
-                //     Text('Sample Text'),
-                //   ],
-                // );
-                showDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  barrierColor: Colors.black54,
-                  builder: (ctx) {
-                    return AlertDialog(
-                        title: Text('Freedom of Bangladesh'),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("A look at Bangladesh's new  chapter."),
-                            Text('\n'),
-                            Text(
-                                'Again invent new independent day of Bangladesh 5th August. The biggest history of Bangladesh 2024'),
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('Cancel'),
-                          )
-                        ],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        backgroundColor: Colors.white);
-                  },
-                );
+            /// Description
+            TextField(
+              textInputAction: TextInputAction.done,
+              enabled: true,
+              maxLines: 5,
+              maxLength: 100,
+              controller: _descriptionTextEditingController,
+              onTap: () {
+                print('Tapped on Description Field');
               },
-              child: Text('Dialog'),
-            ),
-            SizedBox(height: 20),
-
-            /// Bottom Sheet Button
-
-            ElevatedButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  // backgroundColor: Colors.white54,
-                  // barrierColor: Colors.black54,
-                  // isDismissible: false,
-                  // enableDrag: false,
-                  context: context,
-                  builder: (ctx) {
-                    return SizedBox(
-                      height: 500,
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text('Title'),
-                          ),
-                          Divider(),
-                          Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(16),
-                                child: Text(
-                                    'Bangladesh, to the east of India on the Bay of Bengal,  is a South Asian country marked by lush greenery and many waterways. Its Padma (Ganges), Meghna and Jamuna rivers create fertile plains, and travel by boat is common. On the southern coast, the Sundarbans, an enormous mangrove forest shared with Eastern India, is home to the royal Bengal tiger. ― Google \n \n 13-Aug-24'),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                );
+              onChanged: (String value) {
+                print(value);
               },
-              child: Text('Show Bottom Sheet'),
+              decoration: InputDecoration(
+                label: Text('Description'),
+                alignLabelWithHint: true,
+                labelStyle: TextStyle(fontSize: 16),
+                icon: Icon(Icons.description),
+                hintText: 'Enter Your Description',
+                hintStyle: TextStyle(color: Colors.green.shade200),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Colors.yellow,
+                  ),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.blue, width: 2),
+                ),
+              ),
             ),
+            TextButton(
+              onPressed: () {
+                _descriptionTextEditingController.clear();
+                // _descriptionTextEditingController.text = 'Clear';
+              },
+              child: Text('Clear Description'),
+            )
           ],
         ),
       ),
