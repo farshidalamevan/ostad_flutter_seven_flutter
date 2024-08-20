@@ -1,4 +1,4 @@
-/// TextField | Theme
+/// Add Text Theme
 
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,7 @@ class Module9Class1 extends StatelessWidget {
         textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
-                backgroundColor: Colors.grey,
+                backgroundColor: Colors.black,
                 textStyle:
                     TextStyle(fontSize: 16, fontWeight: FontWeight.w900))),
         inputDecorationTheme: InputDecorationTheme(
@@ -49,6 +49,15 @@ class Module9Class1 extends StatelessWidget {
             borderSide: BorderSide(color: Colors.blue, width: 2),
           ),
         ),
+
+        /// Text customize by THEME
+        textTheme: TextTheme(
+            titleLarge: TextStyle(
+                fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
+            titleMedium: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.w600)),
       ),
 
       /// For Dark Theme
@@ -104,131 +113,145 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   TextEditingController _descriptionTextEditingController =
       TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text(
+          'Home',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            /// Name
-            TextField(
-              enabled: true,
-              decoration: InputDecoration(
-                label: Text('Name'),
-                // labelStyle: TextStyle(fontSize: 16),
-                icon: Icon(Icons.add),
-                prefixIcon: Icon(Icons.person),
-                suffixIcon: TextButton(onPressed: () {}, child: Text('Search')),
-                hintText: 'Enter Your Name',
-                // hintStyle: TextStyle(color: Colors.green.shade200),
-                // border: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(12),
-                //   borderSide: BorderSide(
-                //     color: Colors.yellow,
-                //   ),
-                // ),
-                // disabledBorder: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(12),
-                //   borderSide: BorderSide(
-                //     color: Colors.red,
-                //   ),
-                // ),
-                // focusedBorder: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(12),
-                //   borderSide: BorderSide(color: Colors.blue, width: 2),
-                // ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              /// Name
+              TextField(
+                enabled: true,
+                decoration: InputDecoration(
+                  label: Text('Name'),
+                  // labelStyle: TextStyle(fontSize: 16),
+                  icon: Icon(Icons.add),
+                  prefixIcon: Icon(Icons.person),
+                  suffixIcon: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Search',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )),
+                  hintText: 'Enter Your Name',
+                  // hintStyle: TextStyle(color: Colors.green.shade200),
+                  // border: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(12),
+                  //   borderSide: BorderSide(
+                  //     color: Colors.yellow,
+                  //   ),
+                  // ),
+                  // disabledBorder: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(12),
+                  //   borderSide: BorderSide(
+                  //     color: Colors.red,
+                  //   ),
+                  // ),
+                  // focusedBorder: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(12),
+                  //   borderSide: BorderSide(color: Colors.blue, width: 2),
+                  // ),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
+              SizedBox(
+                height: 16,
+              ),
 
-            /// Password
-            TextField(
-              enabled: true,
-              obscureText: true,
-              decoration: InputDecoration(
-                label: Text('Password'),
-                labelStyle: TextStyle(fontSize: 16),
-                icon: Icon(Icons.password),
-                hintText: 'Enter Your Password',
-                hintStyle: TextStyle(color: Colors.green.shade200),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    color: Colors.yellow,
+              /// Password
+              TextField(
+                enabled: true,
+                obscureText: true,
+                decoration: InputDecoration(
+                  label: Text('Password'),
+                  labelStyle: TextStyle(fontSize: 16),
+                  icon: Icon(Icons.password),
+                  hintText: 'Enter Your Password',
+                  hintStyle: TextStyle(color: Colors.green.shade200),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.yellow,
+                    ),
                   ),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    color: Colors.red,
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                    ),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.blue, width: 2),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.blue, width: 2),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            TextField(),
-            SizedBox(
-              height: 16,
-            ),
+              SizedBox(
+                height: 16,
+              ),
+              TextField(),
+              SizedBox(
+                height: 16,
+              ),
 
-            /// Description
-            TextField(
-              textInputAction: TextInputAction.done,
-              enabled: true,
-              maxLines: 5,
-              maxLength: 100,
-              controller: _descriptionTextEditingController,
-              onTap: () {
-                print('Tapped on Description Field');
-              },
-              onChanged: (String value) {
-                print(value);
-              },
-              decoration: InputDecoration(
-                label: Text('Description'),
-                alignLabelWithHint: true,
-                labelStyle: TextStyle(fontSize: 16),
-                icon: Icon(Icons.description),
-                hintText: 'Enter Your Description',
-                hintStyle: TextStyle(color: Colors.green.shade200),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    color: Colors.yellow,
+              /// Description
+              TextField(
+                textInputAction: TextInputAction.done,
+                enabled: true,
+                maxLines: 5,
+                maxLength: 100,
+                controller: _descriptionTextEditingController,
+                onTap: () {
+                  print('Tapped on Description Field');
+                },
+                onChanged: (String value) {
+                  print(value);
+                },
+                decoration: InputDecoration(
+                  label: Text('Description'),
+                  alignLabelWithHint: true,
+                  labelStyle: TextStyle(fontSize: 16),
+                  icon: Icon(Icons.description),
+                  hintText: 'Enter Your Description',
+                  hintStyle: TextStyle(color: Colors.green.shade200),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.yellow,
+                    ),
                   ),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    color: Colors.red,
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                    ),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.blue, width: 2),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.blue, width: 2),
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                _descriptionTextEditingController.clear();
-                // _descriptionTextEditingController.text = 'Clear';
-              },
-              child: Text('Clear Description'),
-            )
-          ],
+              TextButton(
+                onPressed: () {
+                  _descriptionTextEditingController.clear();
+                  // _descriptionTextEditingController.text = 'Clear';
+                },
+                child: Text(
+                  'Clear Description',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
