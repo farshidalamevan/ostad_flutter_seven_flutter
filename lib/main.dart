@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Module9Class1());
+  runApp(Module9Class2());
 }
 
-class Module9Class1 extends StatelessWidget {
-  const Module9Class1({super.key});
+class Module9Class2 extends StatelessWidget {
+  const Module9Class2({super.key});
 
   @override
   Widget build(BuildContext context) {
