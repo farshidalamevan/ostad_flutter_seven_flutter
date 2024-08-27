@@ -1,13 +1,13 @@
-/// MediaQuery | OrientationBuilder | Wrap | LayoutBuilder
+/// FractionallySizedBox
 
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Module11Class1());
+  runApp(Module11Class2());
 }
 
-class Module11Class1 extends StatelessWidget {
-  const Module11Class1({super.key});
+class Module11Class2 extends StatelessWidget {
+  const Module11Class2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,71 +22,31 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// MediaQuery
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    print(mediaQuery.size);
-    print(mediaQuery.size.aspectRatio);
-    print(mediaQuery.size.flipped);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
-        backgroundColor: Colors.grey,
       ),
 
-      /// OrientationBuilder
-      // body: OrientationBuilder(
-      //   builder: (context, Orientation orientation) {
-      //     if (orientation == Orientation.portrait) {
-      //       return Column(
-      //         children: [
-      //           /// Wrap
-      //           Wrap(
-      //             alignment: WrapAlignment.center,
-      //             crossAxisAlignment: WrapCrossAlignment.center,
-      //             spacing: 16,
-      //             children: [
-      //               Text('1st line testing'),
-      //               Text('2nd line testing'),
-      //               Text('3rd line testing'),
-      //               Text('4rd line testing'),
-      //               Text('5th line testing'),
-      //             ],
-      //           ),
-      //           Text(orientation.name)
-      //         ],
-      //       );
-      //     } else {
-      //       return Text('Too big Screen and Landsscap');
-      //     }
-      //   },
-      // ),
-
-      /// LayoutBuilder
-      body: Center(
-        child: LayoutBuilder(
-          builder: (context, BoxConstraints constraints) {
-            if (constraints.maxWidth < 640) {
-              return Text('This is Mobile Apps',
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold));
-            } else if (constraints.maxWidth > 640 &&
-                constraints.maxWidth < 1008) {
-              return Text('This is Tablet Apps',
-                  style: TextStyle(
-                      fontSize: 50,
-                      color: Colors.pink,
-                      fontWeight: FontWeight.bold));
-            } else {
-              return Text('This is Laptop/Desktop Software',
-                  style: TextStyle(
-                      fontSize: 50,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold));
-            }
-          },
+      /// FractionallySizedBox
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: Colors.green,
+        child: FractionallySizedBox(
+          heightFactor: 0.5,
+          widthFactor: 0.6,
+          child: Container(
+            color: Colors.yellow,
+            child: Center(
+              child: Text(
+                'FractionallySizedBox',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
