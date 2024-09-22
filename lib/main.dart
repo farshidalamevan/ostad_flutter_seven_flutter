@@ -1,21 +1,7 @@
-/// Calculator Apps
-
-
-
 import 'package:flutter/material.dart';
-import 'homeScreen.dart';
+import 'package:ostad_flutter_seven_flutter/app.dart';
+
 
 void main() {
-  runApp(const Module12Class2());
-}
-
-class Module12Class2 extends StatelessWidget {
-  const Module12Class2({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeScreen(),
-    );
-  }
+  runApp(Module13Class1());
 }
