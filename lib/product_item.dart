@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:ostad_flutter_seven_flutter/product.dart';
 import 'package:ostad_flutter_seven_flutter/update_product_item.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({
-    super.key,
+    super.key, required this.product,
   });
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      title: const Text('Product Name'),
+      title:  Text(product.productName),
       titleTextStyle: const TextStyle(color: Colors.redAccent),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Product Code:'),
-          const Text('Price: \$120'),
-          const Text('Unit: 2'),
-          const Text('Total Price: \$240'),
+           Text('Product Code: ${product.productCode}'),
+           Text('Price: \$${product.unitPrice}'),
+           Text('Unit: ${product.quantity}'),
+           Text('Total Price: \$${product.totalPrice}'),
           const Divider(
             color: Colors.grey,
           ),

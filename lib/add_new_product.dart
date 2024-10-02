@@ -21,7 +21,7 @@ class _AddNewProductState extends State<AddNewProduct> {
   final TextEditingController _productTotalPriceTEController =
       TextEditingController();
 
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _AddNewProductState extends State<AddNewProduct> {
 
   Widget _buildFormAddNewProduct() {
     return Form(
-        key: _formkey,
+        key: _formKey,
         child: Column(
           children: [
             TextField(
