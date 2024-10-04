@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class UpdateProduct extends StatefulWidget {
-  const UpdateProduct({super.key});
+  const UpdateProduct({super.key, required this.productId});
+
+  final String productId;
 
   @override
   State<UpdateProduct> createState() => _UpdateProductState();
@@ -9,19 +13,21 @@ class UpdateProduct extends StatefulWidget {
 
 class _UpdateProductState extends State<UpdateProduct> {
   final TextEditingController _productNameTEController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _productUnitPriceTEController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _productQuantityTEController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _productCodeTEController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _productImageTEController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _productTotalPriceTEController =
-  TextEditingController();
+      TextEditingController();
 
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool _inProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +35,20 @@ class _UpdateProductState extends State<UpdateProduct> {
       appBar: AppBar(
         title: const Text('Update Product'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: _buildFormAddNewProduct(),
+      body: SingleChildScrollView(
+        child: _inProgress
+            ? const Center(child: RefreshProgressIndicator())
+            : Padding(
+                padding: const EdgeInsets.all(16),
+                child: _buildFormAddNewProduct(),
+              ),
       ),
     );
   }
 
   Widget _buildFormAddNewProduct() {
     return Form(
-      key: _formkey,
+      key: _formKey,
       child: Column(
         children: [
           TextField(
@@ -75,13 +85,59 @@ class _UpdateProductState extends State<UpdateProduct> {
             height: 24,
           ),
           ElevatedButton(
-              onPressed: _onTapAddProductButton, child: const Text('Update Product'))
+              onPressed: _onTapUpdateProductButton,
+              child: const Text('Update Product'))
         ],
       ),
     );
   }
 
-  void _onTapAddProductButton() {}
+  void _onTapUpdateProductButton() {
+    if (_formKey.currentState!.validate()) {
+      updateProduct();
+    }
+  }
+
+  Future<void> updateProduct() async {
+    _inProgress = true;
+    setState(() {});
+    Uri uri = Uri.parse(
+        'http://164.68.107.70:6060/api/v1/UpdateProduct/${widget.productId}');
+    Map<String, dynamic> requestBody = {
+      "Img": _productImageTEController.text,
+      "ProductCode": _productCodeTEController.text,
+      "ProductName": _productNameTEController.text,
+      "Qty": _productQuantityTEController.text,
+      "TotalPrice": _productTotalPriceTEController.text,
+      "UnitPrice": _productUnitPriceTEController.text
+    };
+
+    Response response = await post(uri,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(requestBody));
+
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      clearTextFieldWindow();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Product Updated')));
+      Navigator.of(context).pop(true);
+    }
+
+    _inProgress = false;
+    setState(() {});
+  }
+
+  void clearTextFieldWindow() {
+    _productTotalPriceTEController.clear();
+    _productImageTEController.clear();
+    _productCodeTEController.clear();
+    _productQuantityTEController.clear();
+    _productUnitPriceTEController.clear();
+    _productNameTEController.clear();
+  }
 
   @override
   void dispose() {

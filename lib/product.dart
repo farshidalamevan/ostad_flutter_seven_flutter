@@ -9,10 +9,11 @@ class Product {
 
   Product(
       {required this.id,
-      required this.productName,
-      required this.productCode,
-      required this.productImage,
-      required this.quantity,
-      required this.unitPrice,
-      required this.totalPrice});
+        required this.productName,
+        required this.productCode,
+        required this.productImage,
+        required this.quantity,
+        required this.unitPrice,
+        required this.totalPrice});
+
 }

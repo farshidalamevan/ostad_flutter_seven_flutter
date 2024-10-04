@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:ostad_flutter_seven_flutter/add_new_product.dart';
@@ -15,6 +14,7 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   List<Product> productList = [];
+  bool _inProgress = false;
 
   @override
   void initState() {
@@ -26,24 +26,36 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Product List'),
+        title: const Text('Product List'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                getProductList();
+              },
+              icon: const Icon(Icons.refresh))
+        ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ListView.separated(
-          itemCount: productList.length,
-          itemBuilder: (context, index) {
-            return ProductItem(
-              product: productList[index],
-            );
-          },
-          separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: 8,
-            );
-          },
-        ),
-      ),
+      body: _inProgress
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ListView.separated(
+                itemCount: productList.length,
+                itemBuilder: (context, index) {
+                  return ProductItem(
+                    product: productList[index],
+                    onTapDelete: () {
+                      deleteProduct(productList[index].id);
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 8,
+                  );
+                },
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -56,8 +68,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   Future<void> getProductList() async {
+    _inProgress = true;
+    setState(() {});
     print('Request');
-    Uri uri = Uri.parse('http://152.42.163.176:2008/api/v1/ReadProduct');
+    // Uri uri = Uri.parse('http://152.42.163.176:2008/api/v1/ReadProduct');
+    Uri uri = Uri.parse('http://164.68.107.70:6060/api/v1/ReadProduct');
     Response response = await get(uri);
 
     print(response);
@@ -65,19 +80,38 @@ class _ProductListScreenState extends State<ProductListScreen> {
     print(response.body);
 
     if (response.statusCode == 200) {
+      productList.clear();
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
       for (var item in jsonResponse['data']) {
         Product product = Product(
-            id: item['_id'],
-            productName: item['ProductName'],
-            productCode: item['ProductCode'],
-            productImage: item['Img'],
-            quantity: item['Qty'],
-            unitPrice: item['UnitPrice'],
-            totalPrice: item['TotalPrice']);
+          id: item['_id'] ?? '',
+          productName: item['ProductName'] ?? '',
+          productCode: item['ProductCode'] ?? '',
+          productImage: item['Img'] ?? '',
+          quantity: item['Qty'] ?? '',
+          unitPrice: item['UnitPrice'] ?? '',
+          totalPrice: item['TotalPrice'] ?? '',
+        );
         productList.add(product);
       }
     }
+    _inProgress = false;
     setState(() {});
+  }
+
+  Future<void> deleteProduct(id) async {
+    Uri uri = Uri.parse('http://164.68.107.70:6060/api/v1/DeleteProduct/$id');
+
+    Response response = await get(uri);
+
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      getProductList();
+      setState(() {});
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Product Delete Successfully')));
+    }
   }
 }
